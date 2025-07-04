@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Memory of Us – For Ryza</title>
+  <link href="https://fonts.googleapis.com/css2?family=Pacifico&display=swap" rel="stylesheet">
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: 'Pacifico', cursive;
+      background: linear-gradient(to bottom right, #ffe0ec, #fff7e6);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: start;
+      min-height: 100vh;
+      overflow-x: hidden;
+      padding-top: 30px;
+    }
+    h1 {
+      margin: 20px 0;
+      color: #d6336c;
+    }
+    #game-board {
+      display: grid;
+      grid-template-columns: repeat(3, 180px);
+      grid-gap: 60px 30px;
+      margin-bottom: 50px;
+    }
+    .card {
+      width: 180px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      cursor: pointer;
+      font-size: 20px;
+      position: relative;
+      transition: transform 0.3s ease;
+    }
+    .card-img {
+      width: 180px;
+      height: 180px;
+      background: #fff;
+      border-radius: 10px;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+      overflow: hidden;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .card img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      opacity: 0;
+      transition: opacity 0.5s ease;
+    }
+    .card-message {
+      opacity: 0;
+      font-size: 16px;
+      color: #555;
+      text-align: center;
+      margin-top: 10px;
+      transition: opacity 0.5s ease;
+    }
+    .card.revealed img,
+    .card.revealed .card-message {
+      opacity: 1;
+    }
+  </style>
+</head>
+<body>
+  <h1>For Ryza 💖</h1>
+  <div id="game-board"></div>
+
+  <audio autoplay loop>
+    <source src="https://www.bensound.com/bensound-music/bensound-love.mp3" type="audio/mpeg">
+    Your browser does not support the audio element.
+  </audio>
+
+  <script>
+    const cards = [
+      { img: 'ca79db3d-d112-4884-8c00-b6bd131f8f04.jfif', msg: 'Like tulips, you bring calm to my heart.' },
+      { img: '1f08ba04-9f1c-4d07-b399-dbffe87fd1cc.jfif', msg: 'You’re as lovely as a rose in full bloom.' },
+      { img: '95f16b9c-4802-43b8-976e-45c7c621b2f2.jfif', msg: 'Your smile is brighter than any sunflower.' },
+      { img: '501f4b41-80df-46b6-b5dc-7bf589b88fcd.jfif', msg: 'Every moment with you is a memory I treasure.' },
+      { img: '66229ded-fad1-4308-8214-b3fcec3b8b3f.jfif', msg: 'You are my sunshine, my only one.' },
+      { img: 'd60f2cdc-66cb-491b-88d4-e4b65127f876.jfif', msg: 'I love you more every single day.' },
+      { img: 'c1ecf942-4e3b-4533-88b5-e0af0ed9452d.jfif', msg: 'You make my life bloom beautifully.' },
+      { img: '0e367b11-6468-4197-95d5-cfc11190a7d4.jfif', msg: 'Forever yours – always and always.' }
+    ];
+
+    const gameBoard = document.getElementById('game-board');
+
+    function createCard(cardData) {
+      const card = document.createElement('div');
+      card.className = 'card';
+
+      const cardImgContainer = document.createElement('div');
+      cardImgContainer.className = 'card-img';
+
+      const img = document.createElement('img');
+      img.src = cardData.img;
+      cardImgContainer.appendChild(img);
+      card.appendChild(cardImgContainer);
+
+      const message = document.createElement('div');
+      message.className = 'card-message';
+      message.textContent = cardData.msg;
+      card.appendChild(message);
+
+      card.addEventListener('click', () => {
+        card.classList.add('revealed');
+      });
+
+      return card;
+    }
+
+    cards.forEach(cardData => {
+      const card = createCard(cardData);
+      gameBoard.appendChild(card);
+    });
+  </script>
+</body>
+</html>
